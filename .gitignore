@@ -56,3 +56,7 @@ DartConfiguration.tcl
 *.exe
 *.out
 *.app
+
+*.ipch
+*.bin
+.vscode/*
