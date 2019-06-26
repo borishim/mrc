@@ -23,7 +23,7 @@
 #include "RobotController.h"
 #include "Kinematic.h"
 
-#define OLED_RESET 4
+#define OLED_RESET 12
 Adafruit_SSD1306 display(OLED_RESET);
 
 
