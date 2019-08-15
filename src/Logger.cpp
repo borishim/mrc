@@ -8,7 +8,7 @@
 
 
 
-// #define DEBUG_NAMESPACE "handleSerialCommand"
+//#define DEBUG_NAMESPACE "handleSerialCommand"
 #define DEBUG_NAMESPACE "RobotController"
 // #define DEBUG_NAMESPACE "EEPromStorage"
 // #define DEBUG_NAMESPACE "main"
