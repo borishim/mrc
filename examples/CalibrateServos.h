@@ -33,21 +33,21 @@ VarSpeedServo *servos[6];
 
 // pinNumber, current fre, calibMin frequency, calibMax frequency, angleDegMin, angleDegMax, home position
 float tmpServoConfig[6][6] = {
-    { pin_servo_0,     1500,    1500,    1500,    -90 * DEG_TO_RAD,     90 * DEG_TO_RAD },
-    { pin_servo_1,     1500,    1500,    1500,    -90 * DEG_TO_RAD,     62 * DEG_TO_RAD }, //
-    { pin_servo_2,     1500,    1500,    1500,   -135 * DEG_TO_RAD,     40 * DEG_TO_RAD },
-    { pin_servo_3,     1500,    1500,    1500,    -90 * DEG_TO_RAD,     75 * DEG_TO_RAD },
-    { pin_servo_4,     1500,    1500,    1500,    -20 * DEG_TO_RAD,    135 * DEG_TO_RAD },
-    { pin_servo_5,     1500,    1500,    1500,   -180 * DEG_TO_RAD,    180 * DEG_TO_RAD }
+    { pin_servo_0,     1500,    1500,    1500,    -90,     90 },
+    { pin_servo_1,     1500,    1500,    1500,    -90,     62 }, //
+    { pin_servo_2,     1500,    1500,    1500,   -135,     40 },
+    { pin_servo_3,     1500,    1500,    1500,    -90,     75 },
+    { pin_servo_4,     1500,    1500,    1500,    -20,    135 },
+    { pin_servo_5,     1500,    1500,    1500,   -180,    180 }
 };
 
 const float servoConfig[6][7] = {
-    { pin_servo_0,  150 * DEG_TO_RAD,    852, 2091,    -90 * DEG_TO_RAD,     90 * DEG_TO_RAD, 0 },
-    { pin_servo_1,  150 * DEG_TO_RAD,    710, 1780,    -70 * DEG_TO_RAD,     90 * DEG_TO_RAD, 0 },
-    { pin_servo_2,  150 * DEG_TO_RAD,   2070,  600,    -90 * DEG_TO_RAD,    138 * DEG_TO_RAD, 0 },
-    { pin_servo_3,  150 * DEG_TO_RAD,    650, 2370,    -90 * DEG_TO_RAD,     75 * DEG_TO_RAD, 0 },
-    { pin_servo_4,  150 * DEG_TO_RAD,   2370,  860,   -127 * DEG_TO_RAD,     14 * DEG_TO_RAD, 0 },
-    { pin_servo_5,  150 * DEG_TO_RAD,   2290,  570,    -75 * DEG_TO_RAD,     86 * DEG_TO_RAD, 0 }
+    { pin_servo_0,  150 * DEG_TO_RAD,    600, 2400,    -81,     81, 0 },
+    { pin_servo_1,  150 * DEG_TO_RAD,    960, 2060,    -45,     54, 0 },
+    { pin_servo_2,  150 * DEG_TO_RAD,   810,  2010,    -63,    45, 0 },
+    { pin_servo_3,  150 * DEG_TO_RAD,    600, 2400,    -81,     81, 0 },
+    { pin_servo_4,  150 * DEG_TO_RAD,   690,  2300,   -135,     22.5, 0 },
+    { pin_servo_5,  150 * DEG_TO_RAD,   2280,  680,    -75,     75, 0 }
 };
 
 
@@ -76,8 +76,8 @@ void setup()
                                 100, // velocity
                                 tmpServoConfig[i][2],
                                 tmpServoConfig[i][3],
-                                tmpServoConfig[i][4],
-                                tmpServoConfig[i][5],
+                                tmpServoConfig[i][4] * DEG_TO_RAD,
+                                tmpServoConfig[i][5] * DEG_TO_RAD,
                                 0);
 
         // set the servos to their middle position
@@ -229,15 +229,6 @@ void loop()
             changed       = true;
             break;
 
-        case MOVE_TO_ZERO:
-            Serial.println("moving to angle: 0 degree ");
-            servos[selectedServo]->setTargetRadAngle(0);
-            servos[selectedServo]->process(10000); // high number to fake high interval and move to target position
-
-            changed = true;
-            break;
-
-
         case PRINT_CONFIG:
 
             Serial.println("{ ");
@@ -285,13 +276,13 @@ void loop()
 
             if (serialInput == INCREMENT) {
                 tmpServoConfig[selectedServo][(setmode == ANGLE_MIN) ? 4 : 5]++;
-                servos[selectedServo]->setAngleLimits(tmpServoConfig[selectedServo][4],
-                                                      tmpServoConfig[selectedServo][5]);
+                servos[selectedServo]->setAngleLimits(tmpServoConfig[selectedServo][4] * DEG_TO_RAD,
+                                                      tmpServoConfig[selectedServo][5] * DEG_TO_RAD);
                 changed = true;
             } else if (serialInput == DECREMENT) {
                 tmpServoConfig[selectedServo][(setmode == ANGLE_MIN) ? 4 : 5]--;
-                servos[selectedServo]->setAngleLimits(tmpServoConfig[selectedServo][4],
-                                                      tmpServoConfig[selectedServo][5]);
+                servos[selectedServo]->setAngleLimits(tmpServoConfig[selectedServo][4] * DEG_TO_RAD,
+                                                      tmpServoConfig[selectedServo][5] * DEG_TO_RAD);
                 changed = true;
             }
             break;
@@ -322,13 +313,15 @@ void loop()
 
             if (serialInput == INCREMENT) {
                 tmpServoConfig[selectedServo][1] += 10;
-                servos[selectedServo]->setFreqency(tmpServoConfig[selectedServo][1]);
                 changed = true;
             } else if (serialInput == DECREMENT) {
                 tmpServoConfig[selectedServo][1] -= 10;
-                servos[selectedServo]->setFreqency(tmpServoConfig[selectedServo][1]);
+                changed = true;
+            } else if (serialInput == MOVE_TO_ZERO) {
+                tmpServoConfig[selectedServo][1] = roundf((tmpServoConfig[selectedServo][2] + tmpServoConfig[selectedServo][3]) / 20) * 10;
                 changed = true;
             }
+            servos[selectedServo]->setFreqency(tmpServoConfig[selectedServo][1]);
             break;
         }
 

@@ -7,6 +7,10 @@ namespace {
 Logger logger("RobotController");
 }
 
+namespace {
+Logger state_logger("StateLog");
+}
+
 
 // no kinematic coupling here because it must happen step by step in the servo update method to be able to move kincouping independent from
 // speed
@@ -387,6 +391,7 @@ void RobotController::process() {
             // std::cout << "-0=====================interpol====== "<<currentInterpolationStep<<" total: "<<totalInterpolationSteps << '\n';
             if (currentInterpolationStep == totalInterpolationSteps) {
                 this->state = IDLE;
+                state_logger.info("0");
             } else {
                 this->state = START_MOVE;
 
@@ -751,6 +756,7 @@ void RobotController::process() {
             }
         }
         this->state = MOVING;
+        state_logger.info("1");
 
         break;
     }

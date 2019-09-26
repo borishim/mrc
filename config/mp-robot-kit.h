@@ -12,22 +12,30 @@
 #define pin_additional_servo_7 -1
 
 // pinNumber, maxAngularVel degree/sec, calibMin, calibMax, angleDegMin, angleDegMax, home position
-const float servoConfig[6][7] = {
-    { pin_servo_0,  300 * DEG_TO_RAD,  700.00, 2380.00,  -90.00 * DEG_TO_RAD,  90.00 * DEG_TO_RAD, 0 },
-    { pin_servo_1,  300 * DEG_TO_RAD,  710.00, 1909.00,  -45.00 * DEG_TO_RAD,  90.00 * DEG_TO_RAD, 0 },
-    { pin_servo_2,  300 * DEG_TO_RAD, 2290.00,  650.00,  -45.00 * DEG_TO_RAD, 135.00 * DEG_TO_RAD, 0 },
-    { pin_servo_3,  300 * DEG_TO_RAD,  740.00, 2260.00,  -90.00 * DEG_TO_RAD,  85.00 * DEG_TO_RAD, 0 },
-    { pin_servo_4,  300 * DEG_TO_RAD,  730.00, 2340.00, -140.00 * DEG_TO_RAD,  15.00 * DEG_TO_RAD, 0 },
-    { pin_servo_5,  300 * DEG_TO_RAD,  740.00, 2200.00,  -90.00 * DEG_TO_RAD,  60.00 * DEG_TO_RAD, 0 }
+const float servoConfig[6][7] =
+//{
+//    { pin_servo_0,  300 * DEG_TO_RAD,  700.00, 2380.00,  -90.00 * DEG_TO_RAD,  90.00 * DEG_TO_RAD, 0 },
+//    { pin_servo_1,  300 * DEG_TO_RAD,  710.00, 1909.00,  -45.00 * DEG_TO_RAD,  90.00 * DEG_TO_RAD, 0 },
+//    { pin_servo_2,  300 * DEG_TO_RAD, 2290.00,  650.00,  -45.00 * DEG_TO_RAD, 135.00 * DEG_TO_RAD, 0 },
+//    { pin_servo_3,  300 * DEG_TO_RAD,  740.00, 2260.00,  -90.00 * DEG_TO_RAD,  85.00 * DEG_TO_RAD, 0 },
+//    { pin_servo_4,  300 * DEG_TO_RAD,  730.00, 2340.00, -140.00 * DEG_TO_RAD,  15.00 * DEG_TO_RAD, 0 },
+//    { pin_servo_5,  300 * DEG_TO_RAD,  740.00, 2200.00,  -90.00 * DEG_TO_RAD,  60.00 * DEG_TO_RAD, 0 }
+//};
+{
+{ pin_servo_0,  300*DEG_TO_RAD, 540.00, 2400.00, -1.05, 1.05, 0 },
+{ pin_servo_1,  300*DEG_TO_RAD, 540.00, 2400.00, -0.79, 0.79, 0 },
+{ pin_servo_2,  300*DEG_TO_RAD, 1790.00, 600.00, -0.65, 0.70, 0 },
+{ pin_servo_3,  300*DEG_TO_RAD, 540.00, 2400.00, -1.52, 1.57, 0 },
+{ pin_servo_4,  300*DEG_TO_RAD, 540.00, 2400.00, -1.66, 0.17, 0 },
+{ pin_servo_5,  300*DEG_TO_RAD, 2400.00, 540.00, -0.79, 0.79, 0 }
 };
-
 // mor mp-robot-a/mp-robot-kit
 float geometry[5][3] = {
     {    4.6, 0,    7.9 },
     {      0, 0,   11.7 },
-    {      1, 0,    1.5 },
-    {  12.15, 0,      0 },
-    {      0, 0,     -3 }
+    {      0, 0,    1.7 },
+    {  13.4, 0,      0 },
+    {      0, 0,     -3.5 }
 };
 
 // E.g. joint 0 cant be < 90° to not crash into itself

@@ -1,8 +1,8 @@
 #include "Logger.h"
 
 // 0> ONLY TEST 1> ERROR 2> WARNING 3> INFO
-#define LOG_LEVEL 3
-# define DEBUG 1
+#define LOG_LEVEL 0
+# define DEBUG 0
 
 #ifndef UNIT_TEST
 
@@ -12,6 +12,7 @@
 #define DEBUG_NAMESPACE "RobotController"
 // #define DEBUG_NAMESPACE "EEPromStorage"
 // #define DEBUG_NAMESPACE "main"
+//#define DEBUG_NAMESPACE "StateLog"
 
 unsigned long Logger::usTime              = micros();
 unsigned long Logger::usTimeSinceLastCall = micros();

@@ -6,9 +6,9 @@
 # include "../examples/CalibrateServos.h"
 #else // ifdef EXAMPLES
 
-//# include "../config/mp-robot-d.h"
+# include "../config/mp-robot-d.h"
 //# include "../config/mp-robot-kit.h"
-# include "../config/aliexpress.h"
+//# include "../config/aliexpress.h"
 # include <Arduino.h>
 # include "VarSpeedServo.h"
 # include "TimerOne.h"

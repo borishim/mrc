@@ -31,22 +31,32 @@ const float servoConfig[6][7] =
 //{ pin_servo_4,  150*DEG_TO_RAD, 540.00, 2400.00, -1.66, 0.17, 0 },
 //{ pin_servo_5,  150*DEG_TO_RAD, 2400.00, 540.00, -0.79, 0.79, 0 }
 //};
+//{
+//{ pin_servo_0,  150*DEG_TO_RAD, 750.00, 2120.00, -1.57, 1.57, 0 },
+//{ pin_servo_1,  150*DEG_TO_RAD, 690.00, 2370.00, -1.26, 1.57, 0 },
+//{ pin_servo_2,  150*DEG_TO_RAD, 1740.00, 780.00, -0.77, 1.33, 0 },
+//{ pin_servo_3,  150*DEG_TO_RAD, 560.00, 2370.00, -1.48, 1.48, 0 },
+//{ pin_servo_4,  150*DEG_TO_RAD, 610.00, 2390.00, -3.14, -0.24, 0 },
+//{ pin_servo_5,  150*DEG_TO_RAD, 2390.00, 600.00, -1.41, 1.57, 0 }
+// };
 {
-{ pin_servo_0,  150*DEG_TO_RAD, 750.00, 2120.00, -1.57, 1.57, 0 },
-{ pin_servo_1,  150*DEG_TO_RAD, 690.00, 2370.00, -1.26, 1.57, 0 },
-{ pin_servo_2,  150*DEG_TO_RAD, 1740.00, 780.00, -0.77, 1.33, 0 },
-{ pin_servo_3,  150*DEG_TO_RAD, 560.00, 2370.00, -1.48, 1.48, 0 },
-{ pin_servo_4,  150*DEG_TO_RAD, 610.00, 2390.00, -3.14, -0.24, 0 },
-{ pin_servo_5,  150*DEG_TO_RAD, 2390.00, 600.00, -1.41, 1.57, 0 }
- };
-
+{ pin_servo_0,  150*DEG_TO_RAD, 740.00, 2100.00, -90.00*DEG_TO_RAD, 90.00*DEG_TO_RAD, 0 },
+{ pin_servo_1,  150*DEG_TO_RAD, 940.00, 2040.00, -45.00*DEG_TO_RAD, 63.00*DEG_TO_RAD, 0 },
+{ pin_servo_2,  150*DEG_TO_RAD, 1700.00, 620.00, -10.00*DEG_TO_RAD, 112.00*DEG_TO_RAD, 0 },
+//{ pin_servo_3,  150*DEG_TO_RAD, 2400.00, 600.00, -80.00*DEG_TO_RAD, 80.00*DEG_TO_RAD, 0 },
+//{ pin_servo_4,  150*DEG_TO_RAD, 600.00, 2400.00, -180.00*DEG_TO_RAD, -15.00*DEG_TO_RAD, 0 },
+//{ pin_servo_5,  150*DEG_TO_RAD, 2400.00, 600.00, -80.00*DEG_TO_RAD, 80.00*DEG_TO_RAD, 0 }
+{ pin_servo_3,  150*DEG_TO_RAD, 600.00, 2400.00, -80.00*DEG_TO_RAD, 80.00*DEG_TO_RAD, 0 },
+{ pin_servo_4,  150*DEG_TO_RAD, 600.00, 2400.00, -180.00*DEG_TO_RAD, -15.00*DEG_TO_RAD, 0 },
+{ pin_servo_5,  150*DEG_TO_RAD, 2400.00, 600.00, -80.00*DEG_TO_RAD, 80.00*DEG_TO_RAD, 0 }
+};
 
 // geometry
 float geometry[5][3] = {
     {    4.6, 0,    7.9 },
     {      0, 0,   11.7 },
-    {      1, 0,    1.7 },
-    {  11.4, 0,      0 },
+    {      2.94, 0,    1.7 },
+    {  9.76, 0,      0 },
     {      0, 0,     -3. }
 };
 
@@ -56,8 +66,8 @@ float logicAngleLimits[6][2] = {
       servoConfig[0][5] },
     { servoConfig[1][4],
       servoConfig[1][5] },
-    {  -25 * DEG_TO_RAD,
-       48 * DEG_TO_RAD  },
+    { servoConfig[2][4],
+      servoConfig[2][5] },
     { servoConfig[3][4],
       servoConfig[3][5] },
     { servoConfig[4][4],
